@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import { StyleSheet, Text} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons'
+import { Input, Container, Form, LoginButton} from './styles'
 import * as authService from '../service/authService'
 
 export default function App(props) {
@@ -23,40 +25,27 @@ export default function App(props) {
   }
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Text style={styles.mensagemErro}>{mensagem}</Text>
-      <TextInput
-        style={styles.caixaTexto}
-        placeholder="e-mail"
-        value={email}
-        onChangeText={texto => setEmail(texto)}
-
-      />
-      <TextInput
-        style={styles.caixaTexto}
+      <Form>
+        <Input
+          placeholder="e-mail"
+          value={email}
+          onChangeText={texto => setEmail(texto)}
+        />
+      </Form>
+      <Form>
+        <Input
         placeholder="password"
         value={password}
         secureTextEntry
         onChangeText={texto => setPassword(texto)}
-      />
-      <View style={styles.caixaBotao}>
-        <View style={styles.botao}>
-          <Button
-            title="Login"
-            onPress={validarLogin}
-
-          />
-        </View>
-        <View style={styles.botao}>
-          <Button
-            title="Novo Registro"
-            style={styles.botao}
-          />
-        </View>
-
-      </View>
-
-    </View>
+        />
+      </Form>
+     <LoginButton>
+        <Icon name="navigation" size={20} color="#FFF" onPress={validarLogin}/>
+     </LoginButton>
+    </Container>
   );
 }
 

@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './src/screen/Home'
 import Login from './src/screen/Login'
-import Mapa from './src/screen/Mapa'
 
 //Desabilitano Warnings
 import { YellowBox } from 'react-native'
@@ -29,7 +28,7 @@ export default function App() {
           name="Home" component={Home}
           options={{
             headerStyle: {
-              backgroundColor:'#3AC330' ,
+              backgroundColor:'#7159c1' ,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -45,7 +44,7 @@ export default function App() {
           name="Login" component={Login}
           options={{
             headerStyle: {
-              backgroundColor:'#3AC330' ,
+              backgroundColor:'#7159c1' ,
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
@@ -53,22 +52,6 @@ export default function App() {
             },
             headerShown: true,
             title: "LOGIN",
-            headerTitleAlign: "center",
-            headerLeft: null,
-          }}
-        />
-        <Stack.Screen
-          name="Mapa" component={Mapa}
-          options={{
-            headerStyle: {
-              backgroundColor:'#3AC330' ,
-            },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-            headerShown: true,
-            title: "MAPA",
             headerTitleAlign: "center",
             headerLeft: null,
           }}
