@@ -3,7 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from './src/screen/Home'
-import Login from './src/screen/Login'
+import Mapa from './src/screen/Mapa'
 
 //Desabilitano Warnings
 import { YellowBox } from 'react-native'
@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home" component={Home}
           options={{
@@ -41,7 +41,7 @@ export default function App() {
           }}  
         />
         <Stack.Screen
-          name="Login" component={Login}
+          name="Mapa" component={Mapa}
           options={{
             headerStyle: {
               backgroundColor:'#7159c1' ,
@@ -51,7 +51,7 @@ export default function App() {
               fontWeight: 'bold',
             },
             headerShown: true,
-            title: "LOGIN",
+            title: "Mapa",
             headerTitleAlign: "center",
             headerLeft: null,
           }}
