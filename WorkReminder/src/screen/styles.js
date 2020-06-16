@@ -4,6 +4,9 @@ import { RectButton } from 'react-native-gesture-handler'
 export const Container = styled.View`
   flex: 1;
   padding: 30px;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Form = styled.View`
@@ -13,27 +16,15 @@ export const Form = styled.View`
   border-color: #eee;
 `;
 
-export const Box = styled.View`
-  width: 95%;
-  border-width: 1px;
-  border-radius: 10px;
-  border-color: gray;
-  padding: 10px;
-  margin-top: 10px;
-`;
-
-export const BoxCollum = styled.View`
-  width: 80%;
-`;
-
-export const BoxTitle = styled.Text`
-  fontWeight: bold;
-  color: blue;
-`;
 
 export const Erro = styled.Text`
   color: red;
   margin-left: 20px;
+`;
+
+export const TextStyle = styled.Text`
+  font-size: 18px;
+  margin: 20px;
 `;
 
 export const Input = styled.TextInput.attrs({
@@ -52,55 +43,13 @@ export const SubmitButton = styled(RectButton)`
   align-items: center;
   background: #7159c1;
   border-radius: 4px;
-  margin-left: 60px;
-  padding: 0 12px;
+  margin-left: 10px;
+  padding: 0px;
   height: 50px;
-  width: 20%;
+  width: 30%;
 `;
 
-export const ButtonSearch = styled(RectButton)`
-  justify-content: center;
-  align-items: center;
-  background: #7159c1;
-  border-radius: 4px;
-  margin-left: 3px;
-  padding: 0 12px;
-  height: 40px;
-  width: 20%;
-`;
 
-export const LoginButton = styled(RectButton)`
-  justify-content: center;
-  align-items: center;
-  background: #7159c1;
-  border-radius: 4px;
-  margin-left: 125px;
-  padding: 0 12px;
-  height: 50px;
-  width: 20%;
-`;
-
-export const ButtonIcon = styled(RectButton)`
-  justify-content: center;
-  background: #7159c1;
-  border-radius: 4px;
-  margin-left: 200px;
-  padding: 15px;
-  height: 50px;
-  width: 20%;
-  margin-top: -50px;
-`;
-
-export const ButtonDelete = styled(RectButton)`
-  justify-content: center;
-  background: #7159c1;
-  border-radius: 4px;
-  margin-left: 135px;
-  padding: 15px;
-  height: 50px;
-  width: 20%;
-  margin-top: -40px;
-`;
 
 
 

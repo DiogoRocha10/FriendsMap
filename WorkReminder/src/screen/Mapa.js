@@ -1,25 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Dimensions, Alert} from 'react-native';
-import { Container, Form, ButtonSearch, Input} from './styles'
+import { StyleSheet, Dimensions, SafeAreaView } from 'react-native';
+import { Container } from './styles'
 import MapView, { Marker } from 'react-native-maps'
-import * as Location from 'expo-location';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
-export default function App(props) {
-  const { navigation } = props
+import * as FriendService from '../service/friendService'
 
-  const [pesquisatxt, setPesquisaTxt] = useState("")
-  const [pesquisa, setPesquisa] = useState(null)
+export default function App() {
+
+
   const [myPosition, seMyposition] = useState(null)
-  // Posição da IMED
-  const [localicaoAtual, setLocalicaoAtual] = useState({
-    latitude: -28.2653573,
-    longitude: -52.3996577,
-    latitudeDelta: 0.010,
-    longitudeDelta: 0.010,
-  })
 
-  
   const getMyPosition = async () => {
     let { status } = await Location.requestPermissionsAsync()
 
@@ -32,64 +22,72 @@ export default function App(props) {
     }
   }
 
-  const pesquisaLatLong = async (endereco) => {
-    let posicao = await Location.geocodeAsync(endereco)
-      .then(resultado => {
-        setPesquisa(resultado[0])
-        setLocalicaoAtual({
-          latitude: resultado[0].latitude,
-          longitude: resultado[0].longitude,
-          latitudeDelta: 0.010,
-          longitudeDelta: 0.010,
+  const [localizacaoAtual, setLocalizacaoAtual] = useState({
+    latitude: -28.2653573,
+    longitude: -52.3996577,
+    latitudeDelta: 0.010,
+    longitudeDelta: 0.010,
+  })
+
+  const [localizacoes, setLocalizacoes] = useState([
+    {
+    localizacao: {
+      latitude: -28.2653573,
+      longitude: -52.3996577,
+      latitudeDelta: 0.010,
+      longitudeDelta: 0.010,
+    },
+    title: 'IMED',
+    description: "Campus Passo Fundo"
+  }])
+
+    useEffect(() => {
+      getMyPosition()
+      FriendService.getFriends().then(res =>{
+        
+        let teste = []
+        res.forEach((item) => {
+          teste.push({
+            localizacao: item.localizacao ? item.localizacao : {} ,
+            title: item.nome,
+            description: item.telefone
+          })
+          console.log('res', teste )
         })
-      })
-      .catch(erro => console.log(erro))
-  }
-
-  useEffect(() => {
-    getMyPosition()
-    pesquisaLatLong("")
-
-  }, [])
+        setLocalizacoes(teste)
+      }).catch(erro => console.log('erro',erro))
+    }, [])
 
   return (
     <Container>
-        <Form>
-          <Input
-            placeholder="Informe o local"
-            value={pesquisatxt}
-            onChangeText={text => setPesquisaTxt(text)}
-          />
-          <ButtonSearch>
-            <Icon name="add" size={20} color="#FFF" onPress={() => pesquisaLatLong(pesquisatxt)} />
-          </ButtonSearch>
-          <ButtonSearch>
-            <Icon name="reply" size={20} color="#FFF" onPress={() => navigation.replace('Home')} />
-          </ButtonSearch>
-        </Form>
+      
+        <SafeAreaView style={{ flex: 1 }}>
+
           <MapView
             style={styles.mapStyle}
-            initialRegion={localicaoAtual}
-            region={localicaoAtual}
-          >  
+            initialRegion={localizacaoAtual}
+            region={localizacaoAtual}
+          >
+            {
+              localizacoes.map((item, key) => <Marker
+                key={key}
+                coordinate={item.localizacao}
+                title={item.title}
+                description={item.description}
+              />)
+            }
 
-            {myPosition ? <Marker
-              coordinate={myPosition}
-              title={"Onde eu estou!"}
-              description={"Minha Casa"}
-            />
-
-              : null}
-
-            {pesquisa ? <Marker
-              coordinate={pesquisa}
-              title={"Pesquisa"}
-              description={""}
-            />
+            {
+              myPosition ? <Marker
+                coordinate={myPosition}
+                title={"Onde eu estou!"}
+                description={"Minha Casa"}
+              />
 
               : null}
 
           </MapView>
+        </SafeAreaView>
     </Container>
   );
 }
